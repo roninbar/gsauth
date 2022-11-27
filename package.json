@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "env-cmd node ./bin/www"
+    "start": "env-cmd node ./bin/www",
+    "start-container": "node ./bin/www"
   },
   "dependencies": {
     "@google-cloud/storage": "^6.7.0",
