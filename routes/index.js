@@ -1,9 +1,12 @@
-var express = require('express');
-var router = express.Router();
+const { Storage } = require('@google-cloud/storage');
+const express = require('express');
+const router = express.Router();
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+router.get('/', async function (req, res, next) {
+    const gs = new Storage();
+    const credentials = await gs.authClient.getCredentials();
+    res.render('index', { title: 'Express', ...credentials });
 });
 
 module.exports = router;
