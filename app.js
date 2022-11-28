@@ -7,6 +7,8 @@ const logger = require('morgan');
 
 gcDebugAgent.start({ serviceContext: { enableCanary: false } });
 
+const ENVIRONMENT = process.env['ENVIRONMENT'] || 'production';
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
@@ -16,7 +18,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(logger('dev'));
+app.use(logger(logger(ENVIRONMENT.startsWith('dev') ? 'dev' : 'common')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
