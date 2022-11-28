@@ -5,7 +5,15 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-gcDebugAgent.start({ serviceContext: { enableCanary: false } });
+gcDebugAgent.start({ 
+    allowExpressions: true, 
+    capture: {
+        maxProperties: 0, // 0 means unlimited.
+        maxFrames: 100,
+        maxExpandFrames: 100,
+    },
+    serviceContext: { enableCanary: false },
+ });
 
 const ENVIRONMENT = process.env['ENVIRONMENT'] || 'production';
 
