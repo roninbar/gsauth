@@ -12,7 +12,7 @@ router.get('/', async function (req, res, next) {
     const gs = new Storage();
     const credentials = await gs.authClient.getCredentials();
     log(`Client email: ${credentials.client_email}`);
-    const [url] = await gs.bucket(GS_BUCKET).file('0.txt').getSignedUrl({
+    const [url] = await gs.bucket('kwik-e-mart').file('3rdpartylicenses.txt').getSignedUrl({
         version: 'v4',
         action: 'read',
         expires: Date.now() + 60_000,
