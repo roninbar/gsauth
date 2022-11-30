@@ -12,8 +12,13 @@ router.get('/', async function (req, res, next) {
     const gs = new Storage();
     const credentials = await gs.authClient.getCredentials();
     log(`Client email: ${credentials.client_email}`);
-    const [buckets] = await gs.getBuckets();
-    res.render('index', { title: 'Google Cloud Platform', ...credentials, buckets });
+    const [url] = await gs.bucket(GS_BUCKET).file('0.txt').getSignedUrl({
+        version: 'v4',
+        action: 'read',
+        expires: Date.now() + 60_000,
+        contentType: 'text/plain',
+    });
+    res.render('index', { title: 'Express', ...credentials, url });
 });
 
 module.exports = router;

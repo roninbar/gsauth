@@ -2,8 +2,8 @@ extends layout
 
 block content
   h1= title
-  p Client Email: #{client_email}
-  p Buckets: 
-  ol 
-    each bucket in buckets
-      li= bucket.name
+  p Welcome to #{title}
+  ul
+    li Client Email: #{client_email}
+    //- li Private Key: #{private_key}
+    li Signed URL: #{url}
